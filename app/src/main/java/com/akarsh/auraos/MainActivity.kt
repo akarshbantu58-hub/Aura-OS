@@ -134,8 +134,8 @@ fun AuraHome() {
                     }
                 }
                 Spacer(Modifier.height(14.dp))
-                GlassTile("Android settings", "Wallpaper, display and system options", Modifier.fillMaxWidth(), accent, glass) {
-                    context.startActivity(Intent(android.provider.Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                GlassTile("Set Aura as default", "Choose Aura on the Home app screen", Modifier.fillMaxWidth(), accent, glass) {
+                    context.startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                 }
                 Spacer(Modifier.height(10.dp))
                 Text("Your colour and glass settings are saved on this device.", color = Color(0xFFB7C7DB), fontSize = 11.sp)
