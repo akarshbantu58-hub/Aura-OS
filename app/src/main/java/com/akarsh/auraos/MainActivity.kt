@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -134,13 +135,6 @@ fun AuraHome() {
                             }.padding(8.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            androidx.compose.foundation.Image(
-                                painter = androidx.compose.ui.graphics.painter.BitmapPainter(
-                                    android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888).let { androidx.compose.ui.graphics.ImageBitmap(1, 1) }
-                                ),
-                                contentDescription = null,
-                                modifier = Modifier.size(1.dp)
-                            )
                             AndroidAppIcon(app.icon)
                             Spacer(Modifier.height(6.dp))
                             Text(app.label, color = Color.White, fontSize = 11.sp, maxLines = 2)
@@ -180,13 +174,13 @@ private fun AndroidAppIcon(drawable: android.graphics.drawable.Drawable) {
         val canvas = android.graphics.Canvas(bmp)
         drawable.setBounds(0, 0, 96, 96)
         drawable.draw(canvas)
-        androidx.compose.ui.graphics.ImageBitmap(bmp.width, bmp.height).also {
-            val pixels = IntArray(bmp.width * bmp.height)
-            bmp.getPixels(pixels, 0, bmp.width, 0, 0, bmp.width, bmp.height)
-            it.readPixels(pixels)
-        }
+        bmp.asImageBitmap()
     }
-    androidx.compose.foundation.Image(painter = androidx.compose.ui.graphics.painter.BitmapPainter(bitmap), contentDescription = null, modifier = Modifier.size(42.dp))
+    androidx.compose.foundation.Image(
+        painter = androidx.compose.ui.graphics.painter.BitmapPainter(bitmap),
+        contentDescription = null,
+        modifier = Modifier.size(42.dp)
+    )
 }
 
 @Composable
