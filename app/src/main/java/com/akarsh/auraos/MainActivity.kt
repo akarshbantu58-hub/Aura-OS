@@ -35,7 +35,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private val Ink = Color(0xFF07111F)
+private val Ink = Color(0xFF050A14)
 private val Lilac = Color(0xFFC2B4FF)
 private val AccentChoices = listOf(
     Color(0xFF8CEBFF), Color(0xFFC2B4FF), Color(0xFFFF9BCB), Color(0xFF9BFFCF), Color(0xFFFFD27D)
@@ -80,8 +80,8 @@ fun AuraHome() {
     }
     val filtered = apps.filter { it.label.contains(query, ignoreCase = true) || it.packageName.contains(query, ignoreCase = true) }
 
-    Box(Modifier.fillMaxSize().background(Brush.linearGradient(listOf(Ink, Color(0xFF142840), Color(0xFF281E42))))) {
-        Column(Modifier.fillMaxSize().padding(horizontal = 22.dp, vertical = 18.dp)) {
+    Box(Modifier.fillMaxSize().background(Brush.linearGradient(listOf(Ink, Color(0xFF102238), Color(0xFF241A3D), Color(0xFF07111F))))) {
+        Column(Modifier.fillMaxSize().padding(horizontal = 26.dp, vertical = 20.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
                 Column {
                     Text("A U R A", color = Color.White, fontSize = 13.sp, letterSpacing = 4.sp, fontWeight = FontWeight.Bold)
@@ -145,6 +145,13 @@ fun AuraHome() {
                         Text(SimpleDateFormat("EEEE, d MMMM", Locale.getDefault()).format(Date()).uppercase(), color = accent, fontSize = 11.sp, letterSpacing = 2.sp)
                         Text(clock, color = Color.White, fontSize = 64.sp, fontWeight = FontWeight.Light, letterSpacing = (-2).sp)
                         Text("A calmer way to use your tablet.", color = Color(0xFFD3DEEA), fontSize = 14.sp)
+                        Spacer(Modifier.height(14.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Surface(color = accent.copy(alpha = .14f), shape = RoundedCornerShape(50), border = BorderStroke(1.dp, accent.copy(alpha = .35f))) {
+                                Text("LIQUID GLASS", color = accent, fontSize = 9.sp, letterSpacing = 1.2.sp, modifier = Modifier.padding(horizontal = 11.dp, vertical = 7.dp))
+                            }
+                            Text("${apps.size} apps ready", color = Color(0xFFB7C7DB), fontSize = 11.sp)
+                        }
                     }
                 }
                 Spacer(Modifier.height(16.dp))
@@ -154,7 +161,7 @@ fun AuraHome() {
                 }
                 Spacer(Modifier.height(16.dp))
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(if (showApps) "APP LIBRARY" else "QUICK LAUNCH", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 2.sp)
+                    Text(if (showApps) "YOUR APP LIBRARY" else "FAVOURITES & RECENTS", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
                     TextButton(onClick = { showApps = !showApps; query = "" }) { Text(if (showApps) "Home" else "All apps", color = accent) }
                 }
                 if (showApps) {
